@@ -29,30 +29,41 @@ EDUCATION:
 
 WORK EXPERIENCE:
 
-1. Bateman Collective (Dec 2024 – Present) — Marketing Integrations Intern / Business Development Representative, Lehi, Utah
-   - Managed CRM integrations and optimized lead flow for real estate marketing clients
-   - Designed automations to improve follow-up rates and minimize lead drop-off
-   - Supported a 20% boost in client conversion by refining inbound/outbound workflows
+1. Domo (Dec 2025 – Present) — AI Marketing Intern, Utah
+   - Builds and deploys AI agents using Google Gemini Enterprise to automate marketing workflows and enhance customer engagement
+   - Contributes to Domo's AI Outbound Engine, supporting strategy and execution of AI-amplified go-to-market initiatives
+   - Supports Sales Operations with adoption of Apollo.io, providing technical training and workflow optimization
 
-2. ProStar Property Management (Aug 2023 – Nov 2024) — Leasing Specialist, Orem, Utah
-   - Assisted in marketing campaigns and spearheaded lead generation initiatives
-   - Conducted data analysis to monitor leasing trends and produced reports for senior management
-   - Managed agreements and enhanced contract processes for accuracy and compliance
+2. Bateman Collective (Jun 2025 – Dec 2025) — Business Development Representative, Lehi, Utah
+   - Developed targeted marketing strategies that boosted lead conversion rates by 30%
+   - Led client discovery calls and technical requirement gathering to align solutions with business objectives
+   - Collaborated with cross-functional teams to translate customer needs into actionable product positioning strategies
 
-3. The Church of Jesus Christ of Latter-day Saints (Jun 2021 – Jun 2023) — Volunteer Representative, Santa Fe, Argentina
-   - Developed comprehensive reports and collaborated on strategic projects
-   - Facilitated leadership training sessions for 100+ people monthly
-   - Cultivated communication skills through daily stakeholder engagement
+3. Bateman Collective (Dec 2024 – Jun 2025) — Digital Marketing Integrations Intern, Lehi, Utah
+   - Optimized CRM workflows and cross-platform integrations using Zapier, resulting in a 15% increase in client retention
+   - Managed data integration projects for complex marketing campaigns using ClickUp and Monday.com
+
+4. ProStar Property Management (Aug 2023 – Nov 2024) — Leasing Specialist, Orem, Utah
+   - Spearheaded lead generation initiatives and conducted data analysis to monitor leasing trends
+   - Reduced contract errors by 20% through rigorous process optimization and improved compliance auditing
+
+5. The Church of Jesus Christ of Latter-day Saints (Jun 2021 – Jun 2023) — Volunteer Representative, Santa Fe, Argentina
+   - Facilitated monthly leadership training sessions for 100+ missionaries
+   - Achieved advanced Spanish fluency in an international environment
+
+EDUCATION:
+- Utah Valley University — B.S. Business Analysis (Anticipated August 2025)
+- Key Coursework: CS-339R (Product Owner) — Led development of an LLM-powered chatbot
+- Innovation Academy: Professional mentorship at Gabb Wireless with PM Robert Dean
 
 SKILLS:
-- CRM: HubSpot, Salesforce, Zapier
-- Microsoft Office: Word, Excel, PowerPoint
-- Google Suite: Analytics, Sheets, Calendar
-- Design: Canva
-- Project Management: ClickUp, Monday
+- Platforms: Domo, Entrata CRM, Salesforce, HubSpot, Shopify
+- Tools: Zapier (7000+ apps), Apollo.io, ClickUp, Monday.com, SQL/Data Visualization, Google Sheets
+- AI: Google Gemini Enterprise, AI Agents, AI Marketing
+- Core Competencies: Product Positioning, Technical Messaging, GTM Strategy, Content Creation, Lead Generation
 
 PROFESSIONAL PROFILE:
-Driven marketing professional with a passion for digital growth strategies, CRM systems, and automation. Proven track record managing pipelines, optimizing processes, and supporting lead generation. Focused on scaling customer acquisition through data-driven marketing and workflow automation.`;
+Strategic Business Analysis student at Utah Valley University with hands-on experience in AI Marketing and Digital Integrations. Proven track record translating technical product capabilities into customer-centric messaging within the Domo AI and Data Products Platform. Expert in automation and CRM optimization, driving cross-functional go-to-market excellence.`;
 
 export default {
   async fetch(request, env) {

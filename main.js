@@ -163,7 +163,28 @@ document.querySelectorAll(
   observer.observe(el);
 });
 
+// ─── Typewriter ───────────────────────────────────────────────────────────────
+function typewriter(targetId, text, speed = 55) {
+  const el = document.getElementById(targetId);
+  if (!el) return;
+  let i = 0;
+  const tick = () => {
+    if (i < text.length) {
+      el.textContent += text[i++];
+      setTimeout(tick, speed + Math.random() * 30);
+    }
+  };
+  setTimeout(tick, 900);
+}
+
+// ─── Nav shadow on scroll ─────────────────────────────────────────────────────
+window.addEventListener('scroll', () => {
+  document.querySelector('.nav').classList.toggle('scrolled', window.scrollY > 20);
+});
+
 // ─── Init ─────────────────────────────────────────────────────────────────────
+typewriter('typewriter', 'AI Marketing Intern @ Domo');
+
 // Hide hint bubble after 6 seconds
 setTimeout(() => {
   const hint = document.getElementById('chatHint');
