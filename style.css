@@ -112,7 +112,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 48px;
+  gap: 64px;
 }
 .hero-text { flex: 1; }
 
@@ -121,39 +121,49 @@ body {
   flex-shrink: 0;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
+  padding-bottom: 36px; /* room for badge */
   opacity: 0;
   animation: fade-up 0.7s ease forwards 0.6s;
 }
 
 .hero-photo-card {
   position: relative;
-  width: 260px;
+  width: 300px;
   animation: card-float 4s ease-in-out infinite;
+  /* glass card backing */
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(8px);
+  border-radius: 24px;
+  padding: 10px;
+  box-shadow:
+    0 8px 32px rgba(14,165,233,0.12),
+    0 2px 8px rgba(0,0,0,0.06);
 }
 
 @keyframes card-float {
-  0%, 100% { transform: translateY(0) rotate(-1deg); }
-  50%       { transform: translateY(-14px) rotate(1deg); }
+  0%, 100% { transform: translateY(0) rotate(-0.8deg); }
+  50%       { transform: translateY(-16px) rotate(0.8deg); }
 }
 
 /* Rotating glow ring behind the card */
 .photo-ring {
   position: absolute;
-  inset: -10px;
-  border-radius: 28px;
+  inset: -12px;
+  border-radius: 32px;
   background: conic-gradient(
     from 0deg,
     var(--accent),
     #38BDF8,
     #BAE6FD,
+    #7DD3FC,
     var(--accent-dark),
     var(--accent),
-    transparent 60%
+    transparent 55%
   );
-  animation: ring-spin 4s linear infinite;
+  animation: ring-spin 5s linear infinite;
   z-index: 0;
-  opacity: 0.7;
+  opacity: 0.65;
 }
 
 @keyframes ring-spin {
@@ -164,37 +174,41 @@ body {
   position: relative;
   z-index: 1;
   width: 100%;
-  border-radius: 20px;
+  border-radius: 16px;
   display: block;
-  box-shadow: 0 20px 50px rgba(14,165,233,0.25);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease;
 }
 
 .hero-photo-card:hover .hero-photo {
-  transform: scale(1.03);
-  box-shadow: 0 28px 60px rgba(14,165,233,0.4);
+  transform: scale(1.02);
 }
 
-.hero-photo-card:hover { animation-play-state: paused; }
+.hero-photo-card:hover {
+  animation-play-state: paused;
+  box-shadow:
+    0 20px 48px rgba(14,165,233,0.2),
+    0 4px 12px rgba(0,0,0,0.08);
+}
 
 /* Status badge under the photo */
 .photo-badge {
   position: absolute;
-  bottom: -18px;
+  bottom: -20px;
   left: 50%;
   transform: translateX(-50%);
   background: white;
   border: 1.5px solid var(--border);
-  border-radius: 20px;
-  padding: 7px 16px;
-  font-size: 0.75rem;
+  border-radius: 24px;
+  padding: 8px 18px;
+  font-size: 0.78rem;
   font-weight: 600;
   white-space: nowrap;
-  box-shadow: 0 4px 16px rgba(14,165,233,0.15);
+  box-shadow: 0 4px 20px rgba(14,165,233,0.18);
   display: flex;
   align-items: center;
-  gap: 7px;
-  z-index: 2;
+  gap: 8px;
+  z-index: 3;
+  color: var(--text);
 }
 
 .badge-dot {
@@ -211,9 +225,15 @@ body {
   50%       { box-shadow: 0 0 0 5px rgba(34,197,94,0); }
 }
 
-@media (max-width: 760px) {
-  .hero-content { flex-direction: column-reverse; gap: 40px; }
-  .hero-photo-card { width: 200px; }
+@media (max-width: 860px) {
+  .hero-content { gap: 36px; }
+  .hero-photo-card { width: 240px; }
+}
+
+@media (max-width: 680px) {
+  .hero-content { flex-direction: column-reverse; gap: 48px; }
+  .hero-photo-wrap { justify-content: center; width: 100%; }
+  .hero-photo-card { width: 220px; }
 }
 
 /* Particles */
