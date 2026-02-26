@@ -121,23 +121,18 @@ body {
   padding: 100px 24px 60px;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 40%, #f8fafc 100%);
-  background-size: 300% 300%;
-  animation: hero-gradient 10s ease infinite;
+  background: #f0f9ff;
 }
 
-@keyframes hero-gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
-  }
+.hero-bg-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  opacity: 0.75;
+  pointer-events: none;
 }
 
 .hero-inner {
