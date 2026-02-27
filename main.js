@@ -228,12 +228,12 @@ if (canvas) {
   let width, height;
   let particles = [];
 
-  // Insane AI Swarm Settings
+  // Insane AI Swarm Settings (Optimized for performance)
   const config = {
-    particleCount: 140, // More dense network
-    maxDistance: 160, // Longer connections
+    particleCount: 80, // Reduced for smoother performance
+    maxDistance: 130, // Optimized distance calculations
     colors: ['#0EA5E9', '#38BDF8', '#8B5CF6', '#D946EF', '#22D3EE'], // Cyber/AI theme
-    mouseRadius: 280 // Larger interaction aura
+    mouseRadius: 200 // Smaller interactive zone
   };
 
   // Mouse position
@@ -328,22 +328,25 @@ if (canvas) {
     }
 
     draw() {
+      // Draw outer faint glow without expensive shadowBlur
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius * 2.5, 0, Math.PI * 2);
+      ctx.fillStyle = this.color + '33'; // 20% opacity using hex
+      ctx.fill();
+
+      // Core particle
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
       ctx.fillStyle = this.color;
       ctx.fill();
-
-      // Intense glow
-      ctx.shadowBlur = 15;
-      ctx.shadowColor = this.color;
     }
   }
 
   function initParticles() {
     particles = [];
-    // Adjust density based on screen volume
+    // Adjust density based on screen volume (Optimized cap to prevent lag on big screens)
     const area = width * height;
-    const count = Math.min(Math.max(Math.floor(area / 9000), 50), 180); // higher density
+    const count = Math.min(Math.max(Math.floor(area / 15000), 40), 100);
 
     for (let i = 0; i < count; i++) {
       particles.push(new Particle());
