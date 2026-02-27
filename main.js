@@ -228,12 +228,12 @@ if (canvas) {
   let width, height;
   let particles = [];
 
-  // Settings
+  // Insane AI Swarm Settings
   const config = {
-    particleCount: 70,
-    maxDistance: 130, // Distance to connect particles
-    colors: ['#0EA5E9', '#38BDF8', '#8B5CF6', '#D946EF'], // Cyan, Light Blue, Purple, Magenta
-    mouseRadius: 180 // Distance mouse connects to particles
+    particleCount: 140, // More dense network
+    maxDistance: 160, // Longer connections
+    colors: ['#0EA5E9', '#38BDF8', '#8B5CF6', '#D946EF', '#22D3EE'], // Cyber/AI theme
+    mouseRadius: 280 // Larger interaction aura
   };
 
   // Mouse position
@@ -242,7 +242,7 @@ if (canvas) {
     y: null
   };
 
-  // Track mouse on hero section (canvas captures it)
+  // Track mouse on hero section
   canvas.addEventListener('mousemove', (e) => {
     const rect = canvas.getBoundingClientRect();
     mouse.x = e.clientX - rect.left;
@@ -254,7 +254,6 @@ if (canvas) {
     mouse.y = null;
   });
 
-  // Resize canvas
   function resize() {
     width = canvas.parentElement.offsetWidth;
     height = canvas.parentElement.offsetHeight;
@@ -264,34 +263,68 @@ if (canvas) {
 
   window.addEventListener('resize', () => {
     resize();
-    initParticles(); // Re-distribute particles
+    initParticles();
   });
 
-  // Particle class
   class Particle {
     constructor() {
       this.x = Math.random() * width;
       this.y = Math.random() * height;
-      this.vx = (Math.random() - 0.5) * 1.5;
-      this.vy = (Math.random() - 0.5) * 1.5;
-      this.radius = Math.random() * 2 + 1.5;
+      this.vx = (Math.random() - 0.5) * 3; // Faster base speed
+      this.vy = (Math.random() - 0.5) * 3;
+      this.baseRadius = Math.random() * 2.5 + 1.5;
+      this.radius = this.baseRadius;
       this.color = config.colors[Math.floor(Math.random() * config.colors.length)];
+      this.angle = Math.random() * Math.PI * 2;
+      this.pulseSpeed = 0.05 + Math.random() * 0.08;
     }
 
     update() {
+      // Dynamic pulsing effect
+      this.angle += this.pulseSpeed;
+      this.radius = this.baseRadius + Math.sin(this.angle) * 1.5;
+
+      // Swarm AI behavior: smoothly attract to mouse
+      if (mouse.x !== null) {
+        let dx = mouse.x - this.x;
+        let dy = mouse.y - this.y;
+        let dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < config.mouseRadius) {
+          // Attract towards mouse
+          const attraction = (1 - dist / config.mouseRadius) * 0.05;
+          this.vx += dx * attraction * 0.02;
+          this.vy += dy * attraction * 0.02;
+
+          // Speed limit when swarming
+          const speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
+          if (speed > 4) {
+            this.vx = (this.vx / speed) * 4;
+            this.vy = (this.vy / speed) * 4;
+          }
+        }
+      } else {
+        // Slowly lose swarm momentum when mouse leaves
+        this.vx *= 0.98;
+        this.vy *= 0.98;
+      }
+
+      // Ensure minimum roaming speed
+      const speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
+      if (speed < 0.8) {
+        this.vx *= 1.05;
+        this.vy *= 1.05;
+      }
+
       // Move
       this.x += this.vx;
       this.y += this.vy;
 
-      // Bounce off walls
-      if (this.x < 0 || this.x > width) this.vx *= -1;
-      if (this.y < 0 || this.y > height) this.vy *= -1;
-
-      // Prevent particles completely escaping occasionally
-      if (this.x < -50) this.x = width;
-      if (this.x > width + 50) this.x = 0;
-      if (this.y < -50) this.y = height;
-      if (this.y > height + 50) this.y = 0;
+      // Smooth wrap-around edges for a continuous network feel
+      if (this.x < -50) this.x = width + 50;
+      if (this.x > width + 50) this.x = -50;
+      if (this.y < -50) this.y = height + 50;
+      if (this.y > height + 50) this.y = -50;
     }
 
     draw() {
@@ -300,17 +333,17 @@ if (canvas) {
       ctx.fillStyle = this.color;
       ctx.fill();
 
-      // Add subtle glow
-      ctx.shadowBlur = 10;
+      // Intense glow
+      ctx.shadowBlur = 15;
       ctx.shadowColor = this.color;
     }
   }
 
   function initParticles() {
     particles = [];
-    // Calculate density based on screen volume
+    // Adjust density based on screen volume
     const area = width * height;
-    const count = Math.min(Math.max(Math.floor(area / 15000), 30), 120);
+    const count = Math.min(Math.max(Math.floor(area / 9000), 50), 180); // higher density
 
     for (let i = 0; i < count; i++) {
       particles.push(new Particle());
@@ -320,27 +353,22 @@ if (canvas) {
   function animate() {
     ctx.clearRect(0, 0, width, height);
 
-    // Disable shadow for lines performance
-    ctx.shadowBlur = 0;
+    ctx.shadowBlur = 0; // Disable shadow for line drawing performance
 
-    // Connect particles
     for (let i = 0; i < particles.length; i++) {
       let p1 = particles[i];
       p1.update();
       p1.draw();
 
+      // Connect particles
       for (let j = i + 1; j < particles.length; j++) {
         let p2 = particles[j];
-
         let dx = p1.x - p2.x;
         let dy = p1.y - p2.y;
         let dist = Math.sqrt(dx * dx + dy * dy);
 
         if (dist < config.maxDistance) {
-          // Opacity based on distance
           let opacity = 1 - (dist / config.maxDistance);
-
-          // Gradient line between particles
           let gradient = ctx.createLinearGradient(p1.x, p1.y, p2.x, p2.y);
 
           // Hex to rgba helper
@@ -351,19 +379,20 @@ if (canvas) {
             return `rgba(${r}, ${g}, ${b}, ${alpha})`;
           };
 
-          gradient.addColorStop(0, hexToRgba(p1.color, opacity * 0.5));
-          gradient.addColorStop(1, hexToRgba(p2.color, opacity * 0.5));
+          // Bright laser-like connections
+          gradient.addColorStop(0, hexToRgba(p1.color, opacity * 0.8));
+          gradient.addColorStop(1, hexToRgba(p2.color, opacity * 0.8));
 
           ctx.beginPath();
           ctx.moveTo(p1.x, p1.y);
           ctx.lineTo(p2.x, p2.y);
           ctx.strokeStyle = gradient;
-          ctx.lineWidth = 1;
+          ctx.lineWidth = opacity * 2.5; // Thicker lines for closer connections
           ctx.stroke();
         }
       }
 
-      // Connect to mouse
+      // Connect to mouse with intense energy lines
       if (mouse.x !== null) {
         let dx = p1.x - mouse.x;
         let dy = p1.y - mouse.y;
@@ -372,18 +401,19 @@ if (canvas) {
         if (dist < config.mouseRadius) {
           let opacity = 1 - (dist / config.mouseRadius);
 
-          // Push particles slightly away from mouse
-          if (dist < 40) {
-            p1.x += dx * 0.05;
-            p1.y += dy * 0.05;
-          }
-
           ctx.beginPath();
           ctx.moveTo(p1.x, p1.y);
           ctx.lineTo(mouse.x, mouse.y);
-          ctx.strokeStyle = `rgba(14, 165, 233, ${opacity * 0.4})`; // Cyan line to mouse
-          ctx.lineWidth = 1.5;
+          // Glowing electric cyan/purple towards mouse
+          ctx.strokeStyle = `rgba(56, 189, 248, ${opacity * 0.7})`;
+          ctx.lineWidth = opacity * 3.5;
           ctx.stroke();
+
+          // Add a spark dot at connecting points
+          ctx.beginPath();
+          ctx.arc(p1.x, p1.y, 2, 0, Math.PI * 2);
+          ctx.fillStyle = '#fff';
+          ctx.fill();
         }
       }
     }
@@ -391,7 +421,6 @@ if (canvas) {
     requestAnimationFrame(animate);
   }
 
-  // Start
   resize();
   initParticles();
   animate();
