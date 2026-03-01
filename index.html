@@ -19,6 +19,7 @@
       <span class="nav-logo">NB</span>
       <div class="nav-links">
         <a href="#about">About</a>
+        <a href="#live-sites">Live Sites</a>
         <a href="#experience">Experience</a>
         <a href="#projects">Projects</a>
         <a href="#skills">Skills</a>
@@ -88,8 +89,75 @@
     </div>
   </section>
 
+  <!-- ── Other Live Projects ── -->
+  <section class="section section-alt" id="live-sites">
+    <div class="container">
+      <h2 class="section-title">Other Live Projects</h2>
+      <p style="color: var(--muted); margin-bottom: 32px; max-width: 600px;">A collection of my active web builds,
+        animations, and live prototype sites.</p>
+      <div class="projects-grid">
+
+        <!-- Live Project 1 -->
+        <a href="../bmw-scroll-animation/index.html" target="_blank" class="project-card fade-in"
+          style="text-decoration: none; display: flex; flex-direction: column; padding: 0; overflow: hidden;">
+          <div
+            style="width: 100%; height: 220px; border-bottom: 1px solid var(--border); overflow: hidden; position: relative; background: #000;">
+            <!-- Place your video inside the personal-website folder and name it 'bmw.mp4' -->
+            <video src="bmw.mp4" autoplay loop muted playsinline
+              style="width: 100%; height: 100%; object-fit: cover;"></video>
+          </div>
+
+          <div style="padding: 24px;">
+            <div class="project-card-top">
+              <div class="project-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                  <line x1="8" y1="21" x2="16" y2="21" />
+                  <line x1="12" y1="17" x2="12" y2="21" />
+                </svg>
+              </div>
+              <span class="project-tag">Web Animation</span>
+            </div>
+            <h3 class="project-title" style="color: var(--text);">BMW Scroll UI</h3>
+            <p class="project-desc">A premium Apple-style scroll reveal animation mimicking high-end product sites built
+              with GSAP and Lenis.</p>
+            <div class="project-chips">
+              <span class="chip">GSAP</span>
+              <span class="chip">JavaScript</span>
+              <span class="chip">HTML/CSS</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Live Project 2 (Placeholder) -->
+        <a href="#" class="project-card fade-in" style="text-decoration: none; display: block; padding: 24px;">
+          <div class="project-card-top">
+            <div class="project-icon" style="flex-shrink: 0;">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                </path>
+              </svg>
+            </div>
+            <span class="project-tag">Coming Soon</span>
+          </div>
+          <h3 class="project-title" style="color: var(--text);">New Web App</h3>
+          <p class="project-desc">Another live website or web application currently in active development.</p>
+          <div class="project-chips">
+            <span class="chip">React</span>
+            <span class="chip">Tailwind</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
   <!-- ── Experience ── -->
-  <section class="section section-alt" id="experience">
+  <section class="section" id="experience">
     <div class="container">
       <h2 class="section-title">Experience</h2>
       <div class="timeline">
@@ -187,7 +255,7 @@
   </section>
 
   <!-- ── Projects ── -->
-  <section class="section" id="projects">
+  <section class="section section-alt" id="projects">
     <div class="container">
       <h2 class="section-title">Projects</h2>
       <div class="projects-grid">
@@ -246,6 +314,8 @@
       </div>
     </div>
   </section>
+
+
 
   <!-- ── Skills ── -->
   <section class="section" id="skills">
